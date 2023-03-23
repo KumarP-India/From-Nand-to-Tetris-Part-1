@@ -1,0 +1,75 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/03/b/RAM512.hdl
+
+/**
+ * Memory of 512 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM512 {
+    IN in[16], load, address[9];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+
+
+
+    /**
+
+     * D-Mux Gate is used to distribute the load to addresses and rest 0 reardless!
+
+     * Load for every 64-Register RAM is named RL{no.}, where no. is the number of the RAM from the start: 1 -> 8
+
+     * The address as contains both address of the RAM(s) & thier RAM(s), we can split them in 2 parts.
+
+     * First 3 values represent parent RAM(s) selector and last 6 values represent child RAM(s) selector.
+
+     * Since the indexing is from right to left, 0 to 5: Register and 6 to 8: RAM(s) selector.
+
+     */
+
+    DMux8Way(in = load, sel = address[6..8], a = RL1, b = RL2, c = RL3, d = RL4, e = RL5, f = RL6, g = RL7, h = RL8);
+
+
+
+
+    /**
+
+     * We create parent RAM(s) here (n = 8), with respective addresses, loads and same input. Output is names R{no.},
+     * where no. is the number of the Register from the start: 1 -> 8.
+
+     */
+
+    RAM64(in = in, load = RL1, address = address[0..5], out = R1);
+
+    RAM64(in = in, load = RL2, address = address[0..5], out = R2);
+
+    RAM64(in = in, load = RL3, address = address[0..5], out = R3);
+
+    RAM64(in = in, load = RL4, address = address[0..5], out = R4);
+
+    RAM64(in = in, load = RL5, address = address[0..5], out = R5);
+
+    RAM64(in = in, load = RL6, address = address[0..5], out = R6);
+
+    RAM64(in = in, load = RL7, address = address[0..5], out = R7);
+
+    RAM64(in = in, load = RL8, address = address[0..5], out = R8);
+
+
+
+
+
+    // For Output we use Mux gate to select the parent RAM(s) output from selector => address.
+
+    Mux8Way16(a = R1, b = R2, c = R3, d = R4, e = R5, f = R6, g = R7, h = R8, sel = address[6..8], out = out);
+
+
+
+
+}

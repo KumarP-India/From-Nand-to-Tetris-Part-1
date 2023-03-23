@@ -1,0 +1,46 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Bit.hdl
+
+/**
+ * 1-bit register:
+ * If load[t] == 1 then out[t+1] = in[t]
+ *                 else out does not change (out[t+1] = out[t])
+ */
+
+CHIP Bit {
+    IN in, load;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+
+
+/**
+
+ * Mux gata takes the first input from previous Data Flip Flop gate; 
+ * the second input from the input stream; 
+ * the selector from the load stream; 
+ * and outputs to stream dffIn (custom wire).
+
+ */
+
+    Mux(a = dffOut, b = in, sel = load, out = dffIn); 
+
+
+
+
+/**
+
+ * Data Flip Flop gate takes input from dffIn stream and outputs to:
+ *
+ * 1. dffIn stream for next time cycle.
+ * 2. out stream.
+
+ */
+
+    DFF(in = dffIn, out = dffOut, out = out);
+
+
+}

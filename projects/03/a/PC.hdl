@@ -1,0 +1,53 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+
+
+    // First we check if any of the changes were puposed or not. Expressed by change
+
+    Or(a = inc, b = load, out = changeCheck); // This checks if inc or load or both are purposed ie. true (1)
+
+    Or(a = reset, b = changeCheck, out = change); // From above (line this - 2) and reset is chacked.
+
+
+
+
+
+    // Now we do action, from least significant to most, if purposed by usind Mux gate to either choose same value as pvs. Register = iter, or after operation value. 1 => Yes, 0 => iter
+
+
+    Inc16(in = iter, out = incr); // This do increse operation on 16 bit iter. This is passed in Mux gate
+
+    Mux16(a = iter, b = incr, sel = inc, out = Incr); // Least significant operation: Increment by 1.
+
+
+    Mux16(a = Incr, b = in, sel = load, out = Val); // Middle operation: Replacing the value to input -> in
+
+
+    Mux16(a = Val, b[0] = false, sel = reset, out = INPUT); // Most significant operation: Replacing the value to 0.
+
+
+
+
+
+
+    Register(in = INPUT, load = change, out = iter, out = out); // This creates Register to store the 16bit data to be used in this counter.
+
+
+}

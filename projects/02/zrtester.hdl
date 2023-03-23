@@ -1,0 +1,20 @@
+/**
+ * 16 bit Nand operation.
+ */
+
+CHIP Nand16 {
+    IN num[16];
+    OUT out;
+
+    PARTS:
+   // Put you code here:
+
+    Or8Way(in=num[0..7],out=or1); 
+
+    Or8Way(in=num[8..15],out=o2);
+
+    Or(a=or1,b=o2,out=nego);
+
+    Not(in=nego,out=out);
+
+}

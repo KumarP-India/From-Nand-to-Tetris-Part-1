@@ -1,0 +1,199 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/CPU.hdl
+
+/**
+ * The Hack CPU (Central Processing unit), consisting of an ALU,
+ * two registers named A and D, and a program counter named PC.
+ * The CPU is designed to fetch and execute instructions written in 
+ * the Hack machine language. In particular, functions as follows:
+ * Executes the inputted instruction according to the Hack machine 
+ * language specification. The D and A in the language specification
+ * refer to CPU-resident registers, while M refers to the external
+ * memory location addressed by A, i.e. to Memory[A]. The inM input 
+ * holds the value of this location. If the current instruction needs 
+ * to write a value to M, the value is placed in outM, the address 
+ * of the target location is placed in the addressM output, and the 
+ * writeM control bit is asserted. (When writeM==0, any value may 
+ * appear in outM). The outM and writeM outputs are combinational: 
+ * they are affected instantaneously by the execution of the current 
+ * instruction. The addressM and pc outputs are clocked: although they 
+ * are affected by the execution of the current instruction, they commit 
+ * to their new values only in the next time step. If reset==1 then the 
+ * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather 
+ * than to the address resulting from executing the current instruction. 
+ */
+
+CHIP CPU {
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset==1) or continue executing
+                         // the current program (reset==0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write to M? 
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+    PARTS:
+    // Put your code here:
+
+
+    /* --- A register --- */
+
+    // opcode: 0 means A instruction which is to save the instruction to A => pass instruction to A input;
+    // 1 means C instruction inwhich ALU output is needed
+    Mux16(a = instruction, b = ALUoutput, sel = instruction[15], out = Ainput);
+
+
+
+    // A register only saves data if it is A instruction or destination includes A
+    // Opcode: Ins[15]; destination for A, val = 1, d1: Ins[5]
+    // On compare ([15], [5]) we need 01, 10 or 11. Which is negation of OR logic
+
+    Or(a = instruction[15], b = instruction[5], out = NotAload); // Does the OR logic
+
+    Not(in = NotAload, out = Aload); // Negate the OR logic for A load
+
+
+
+
+    ARegister(in = Ainput, load = Aload, out = Aoutput, out[0..14] = addressM); // conects the A to input, load and output
+
+
+
+
+
+    /* --- ALU --- */
+
+    /*
+     * ALU inputs:
+    
+       1. x = data from D
+
+       2. y = data from A or M
+
+       3. zx => zero the x input?
+       
+       4. nx => negate the x input?
+       
+       5. zy => zero the y input?
+       
+       6. ny => negate the y input?
+       
+       7. f  => compute out = x + y (if 1) or x & y (if 0)
+       
+       8. no => negate the out output?
+
+
+       ALU output:
+
+       1. out: Computed value
+
+       2. zr:  1 bit => is out zero?
+
+       3. ng:  1 bit => is out negative? ie. out < 0
+
+     */
+
+
+     Mux16(a = Aoutput, b = inM, sel = instruction[12], out = ALUinputY); // a in Instruction selects A or M input
+
+
+    ALU(x = Doutput, y = ALUinputY, zx = instruction[11], nx = instruction[10], zy = instruction[9], ny = instruction[8], f = instruction[7], no = instruction[6], out = ALUoutput, zr = ZERO, ng = NEGATIVE, out = outM); 
+    // Conects the ALU to its inputs and 2 1 bit output to temp ZERO & NEGATIVE and to temp ALUoutput & output of CPU OutM
+
+
+
+
+
+    /* --- D register --- */
+
+    DRegister(in = ALUoutput, load = instruction[4], out = Doutput); // input of D: ALU output, load = d2 ie. Ins[4] and output: Doutput
+
+
+
+
+
+    
+    /* --- PC ---*/
+
+    // inc is true when jump j1, j2 and j3 at Ins[0] to Ins[2] are all 0
+    // ie. Not(OR(j1, j2, j3)) = inc ==> Not(Or(Or(j1, j2), j3)) = inc
+
+    Or(a = instruction[0], b = instruction[1], out = JumpJ1andJ2check);
+    Or(a = JumpJ1andJ2check, b = instruction[2], out = PCinc);
+
+
+    /* 
+     * For load we need to first consider of jump is specified, then we need to know the output of ALU for
+       comparion.
+
+     * There are 3 comparision and then combination of them is used. 
+
+     * We can use out 1 bit ALU output for these
+
+     * 1. 'less than 0' in j1: Number needs to be negative that means NEGATIVE = 1
+
+     * These are 'equal to 0' in j2: Number needs to be 0 that means ZERO = 1
+
+     * These are 'greter than 0' in j3: Number needs to be posivive and not = 0 that means NEGATIVE and ZERO = 0
+
+     * We can use logical gates to test.
+
+     */
+
+
+    // j1
+
+    And(a = instruction[2], b = NEGATIVE, out = J1test);
+
+
+    // j2
+
+    And(a = instruction[1], b = ZERO, out = J2test);
+
+
+    // j3
+
+    And(a = instruction[0], b = ZERO, out = J3halftest); // left: NEGATIVE
+
+    And(a = J3halftest, b = NEGATIVE, out = J3test);
+
+
+
+
+    // load test from J1, J2, J3
+
+    Or(a = J1test, b = J2test, out = PCLoadHalf); // left J3test
+
+    Or(a = PCLoadHalf, b = J3test, out = PCload);
+
+
+    PC(in = Aoutput, load = PCload, inc = PCinc, reset = reset, out[0..14] = pc);
+
+
+
+
+
+    /* --- Output streams --- */
+
+    // OutM: check ALU
+
+
+    // writeM: d3 at Ins[3]
+
+    And(a = instruction[3], b = true, out = writeM);
+
+    
+    // pc: refer PC
+
+    
+    // addressM: refer A register
+
+
+
+}

@@ -1,0 +1,67 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/RAM8.hdl
+
+/**
+ * Memory of 8 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM8 {
+    IN in[16], load, address[3];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+
+
+    /**
+
+     * D-Mux Gate is used to distribute the load to addresses and rest 0 reardless!
+
+     * Load for every Register is named RL{no.}, where no. is the number of the register from the start: 1 -> 8
+
+     */
+
+    DMux8Way(in = load, sel = address, a = RL1, b = RL2, c = RL3, d = RL4, e = RL5, f = RL6, g = RL7, h = RL8);
+
+
+
+
+    /**
+
+     * We create Regesters here (n = 8), with respective addresse and same input. Output is names R{no.},
+     * where no. is the number of the Register from the start: 1 -> 8.
+
+     */
+
+    Register(in = in, load = RL1, out = R1);
+
+    Register(in = in, load = RL2, out = R2);
+
+    Register(in = in, load = RL3, out = R3);
+
+    Register(in = in, load = RL4, out = R4);
+
+    Register(in = in, load = RL5, out = R5);
+
+    Register(in = in, load = RL6, out = R6);
+
+    Register(in = in, load = RL7, out = R7);
+
+    Register(in = in, load = RL8, out = R8);
+
+
+ 
+ 
+ 
+    // For Output we use Mux gate to select the register's output from selector => address.
+ 
+    Mux8Way16(a = R1, b = R2, c = R3, d = R4, e = R5, f = R6, g = R7, h = R8, sel = address, out = out);
+
+
+
+}
