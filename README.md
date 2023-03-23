@@ -6,6 +6,12 @@ This repository contains my solutions to all of the assessments of the Nand2Tetr
 
 The course is divided into 12 weeks, with each week covering a specific aspect of computer architecture and software development. Part 1 covers first 6 weeks and Part 2 rest of them. The course also provides a suite of software tools that you'll use to design and test your own computer systems.
 
+### Course addresses
+
+Website: https://www.nand2tetris.org/
+Online Course Part I: https://www.coursera.org/learn/build-a-computer
+Online Course Part II: https://www.coursera.org/learn/nand2tetris2
+
 ## Repo Structure
 
 This repository is structured as follows:
