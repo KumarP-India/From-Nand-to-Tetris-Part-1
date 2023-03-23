@@ -26,4 +26,4 @@ See the [`LICENSE`](/LICENSE) file for more details.
 
 ## Credits
 
-This Readme file may have been copied from [`Joseph An's` ](https://github.com/josephan)[nand2tetris Repo](https://github.com/josephan/nand2tetris). [`Link`](https://github.com/josephan/nand2tetris/master/README.md)
+This Readme file may have been copied from [`Joseph An's` ](https://github.com/josephan)[nand2tetris Repo](https://github.com/josephan/nand2tetris). [`Link`](https://github.com/josephan/nand2tetris/blob/master/README.md)
