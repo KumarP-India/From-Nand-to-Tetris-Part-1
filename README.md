@@ -1,16 +1,18 @@
 # From-Nand-to-Tetris-Part-1: Course Solutions
 
-This repository contains my solutions to all of the assessments of the Nand2Tetris - Part 1 course. The Nand2Tetris course is a self-paced online course that teaches you how to build a computer from the ground up, starting with basic logic gates and working up to a complete computer system.
+This repository contains my solutions to all of the assessments of the `Nand2Tetris - Part 1 course`. The Nand2Tetris course is a self-paced online course that teaches you how to build a computer from the ground up, starting with basic logic gates and working up to a complete computer system.
 
 ## Course Overview
 
-The course is divided into 12 weeks, with each week covering a specific aspect of computer architecture and software development. Part 1 covers first 6 weeks and Part 2 rest of them. The course also provides a suite of software tools that you'll use to design and test your own computer systems.
+The course is divided into `12 weeks`, with each week covering a specific aspect of computer architecture and software development. `Part 1` covers first 6 weeks and `Part 2` rest of them. The course also provides a suite of software tools that you'll use to design and test your own computer systems.
 
 ### Course addresses
 
-Website: https://www.nand2tetris.org/
-Online Course Part I: https://www.coursera.org/learn/build-a-computer
-Online Course Part II: https://www.coursera.org/learn/nand2tetris2
+`Website`: https://www.nand2tetris.org/
+
+`Online Course Part I`: https://www.coursera.org/learn/build-a-computer
+
+`Online Course Part II`: https://www.coursera.org/learn/nand2tetris2
 
 ## Repo Structure
 
@@ -28,7 +30,7 @@ This repository is structured as follows:
     - [`week05/`](/projects/week05/)
     - `week06/` (currently unavailable)
 
-    Note: I have created a separate README file for each week that provides more information about the assessment questions and my solutions. Please refer to those files for more details.
+    Note: I have created a separate `README file` for each week that provides more information about the assessment questions and my solutions. Please refer to those files for more details.
 
 - [`Personal/`](/Personal/): This folder contains some of the files and images that I found useful while completing the assessments. These files were already mentioned in the course and are not intended for cheating purposes.
 
