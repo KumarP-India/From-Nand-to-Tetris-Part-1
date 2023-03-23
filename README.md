@@ -30,7 +30,7 @@ Note: Week 6 is currently unavailable, as I have not yet completed the assessmen
 
 ## License
 
-See the [`LICENSE`](\LICENSE) file for more details.
+See the [`LICENSE`](/LICENSE) file for more details.
 
 ## Credits
 
