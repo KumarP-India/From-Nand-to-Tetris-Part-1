@@ -12,11 +12,11 @@ Each week's solution is stored in a separate folder. The folder structure is as 
 - [`./week05`](/projects/week05/README.md)
 
 
-To access the solution for a particular week, navigate to the corresponding folder above. Each week's folder has its own readme file that explains the details of the assignments.
+To access the solution for a particular week, navigate to the corresponding folder above. Each week's folder has its own `readme file` that explains the details of the assignments.
 
-Note: Week 6 is currently unavailable, as I have not yet completed the assessment.
+Note: Week 6 onwards is currently unavailable, as I have not yet completed the assessment.
 
-`Submission` folder in each folder contains .zip files which is intended to be submited in the course submission portal.
+`Submission` folder in each folder contains `.zip files` which is intended to be submited in the course submission portal.
 
 ## License
 
