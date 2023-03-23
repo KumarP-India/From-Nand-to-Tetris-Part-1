@@ -5,7 +5,7 @@ Write the following programs in the machine language, HACK:
 ### Mult.asm
 Calculate and store the product of RAM[0] and RAM[1] in RAM[2]
 
-File: [`Fill.asm`](./mult/Mult.asm)
+File: [`Mult.asm`](./mult/Mult.asm)
 
 ### Fill.asm
 When a user is pressing any key on the keyboard, fill the screen black.
