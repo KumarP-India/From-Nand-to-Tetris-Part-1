@@ -4,17 +4,19 @@ This folder contains the solutions to the assignments of [this course](/README.m
 
 Each week's solution is stored in a separate folder. The folder structure is as follows:
 
-- [`./week00`](/projects/week00)
-- [`./week01`](/projects/week01)
-- [`./week02`](/projects/week02)
-- [`./week03`](/projects/week03)
-- [`./week04`](/projects/week04)
-- [`./week05`](/projects/week05)
+- [`./week00`](/projects/week00/readme.md)
+- [`./week01`](/projects/week01/readme.md)
+- [`./week02`](/projects/week02/readme.md)
+- [`./week03`](/projects/week03/readme.md)
+- [`./week04`](/projects/week04/readme.md)
+- [`./week05`](/projects/week05/readme.md)
 
 
 To access the solution for a particular week, navigate to the corresponding folder above. Each week's folder has its own readme file that explains the details of the assignments.
 
 Note: Week 6 is currently unavailable, as I have not yet completed the assessment.
+
+`Submission` folder in each folder contains .zip files which is intended to be submited in the course submission portal.
 
 ## License
 
