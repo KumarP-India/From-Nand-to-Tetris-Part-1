@@ -2,15 +2,16 @@
 
 Given a Data Flip Flop chip and all chips built in [`Project 1`](../week01/README.md) and [`Project 1`](../week02/README.md), build the following chips:
 
-* [`Bit`](./Bit.hdl)
-* [`Register`](./Register.hdl)
-* [`RAM8`](./RAM8.hdl)
-* [`RAM64`](./RAM64.hdl)
-* [`RAM512`](./RAM512.hdl)
-* [`RAM5K`](./RAM5K.hdl)
-* [`RAM16K`](./RAM16K.hdl)
-* [`PC`](./PC.hdl)
+* [`Bit`](./a/Bit.hdl)
+* [`Register`](./a/Register.hdl)
+* [`RAM8`](./a/RAM8.hdl)
+* [`RAM64`](./b/RAM64.hdl)
+* [`RAM512`](./b/RAM512.hdl)
+* [`RAM5K`](./b/RAM5K.hdl)
+* [`RAM16K`](./b/RAM16K.hdl)
+* [`PC`](./a/PC.hdl)
 
+Note: The project 3 files are located in two folders named 'a' and 'b'. This technical detail speeds up the simulation and testing of the project 3 chips. However, when you submit your work in a zip file, put all the files together, and not inside any folders. 
 
 You need to pack all of the above chips and upload it as [`project3.zip`](./Submission/project3.zip) located in [`Submission folder`](./Submission)
 
