@@ -24,7 +24,7 @@ This repository is structured as follows:
 
     Note: I have created a separate README file for each week that provides more information about the assessment questions and my solutions. Please refer to those files for more details.
 
-- [`personal/`](/personal/): This folder contains some of the files and images that I found useful while completing the assessments. These files were already mentioned in the course and are not intended for cheating purposes.
+- [`Personal/`](/Personal/): This folder contains some of the files and images that I found useful while completing the assessments. These files were already mentioned in the course and are not intended for cheating purposes.
 
 Note: Week 6 is currently unavailable, as I have not yet completed the assessment.
 
